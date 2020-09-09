@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Forma1.Models.Csapat>
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                Név
+            </th>
+            <th>
+                Alapítás éve
+            </th>
+            <th>
+                Megnyert bajnokságok
+            </th>
+            <th>
+               Fizetett nevezés
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Nev)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alapitas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bajnoksagok)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fizetes)
+            </td>
+            <td>
+                <a asp-action="Modify" asp-route-id="@item.ID">Módosítás</a>
+            </td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" value="@item.ID" name="CsapatID" />
+                    <input type="submit" value="Törlés"class="btn btn-primary"/>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
